@@ -1,3 +1,4 @@
+It is a task given by Technocolabs
 # Spotify-Song-Prediction
 CONTENTS
 Task :
@@ -5,6 +6,10 @@ Perform time-series analysis :
 Recommend artists
 Predict Popularity rating
 Differentiate genres
+
+
+
+
 Spotify Song Prediction
 Audio features of 160k+ songs released in between 1921 and 2020
 Task :
