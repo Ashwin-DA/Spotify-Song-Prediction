@@ -1,0 +1,195 @@
+Jupyter Notebook
+Perform time-series analysis
+
+Code
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+dataset=pd.read_csv(r'D:\dataset\spotify_data\data.csv')
+df=dataset
+print(df.head())
+# Perform time-series analysis
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+dataset=pd.read_csv(r'D:\dataset\spotify_data\data.csv')
+df=dataset
+print(df.head())
+df.describe()
+df.describe()
+df.shape
+df.shape
+df.columns
+df.columns
+pd.isnull(df).sum()
+pd.isnull(df).sum()
+df["artists"].value_counts()[:20]
+a=pd.DataFrame({'song popularity':df['artists'].value_counts().head(10)})
+a.plot.bar(color='lightgreen')
+plt.title('Top 10 Artists')
+plt.xlabel('Artists')
+plt.ylabel('Number of song')
+plt.show()
+a=pd.DataFrame({'song popularity':df['artists'].value_counts().head(10)})
+a.plot.bar(color='lightgreen')
+plt.title('Top 10 Artists')
+plt.xlabel('Artists')
+plt.ylabel('Number of song')
+plt.show()
+a=pd.DataFrame({'song popularity':df['artists'].value_counts().head(20)})
+a.plot.bar(color='lightgreen')
+plt.title('Top 20 Artists')
+plt.xlabel('Artists')
+plt.ylabel('Number of song')
+plt.show()
+corr = df[['acousticness','danceability','energy',
+'instrumentalness','liveness','tempo','valence']].corr()
+sns.set(style='darkgrid')
+%matplotlib inline
+plt.figure(figsize=(12,8))
+sns.heatmap(corr, annot=True)
+df[['artists','energy','acousticness']].groupby('artists').mean().sort_values(by='energy', ascending=False)[:10]
+df.acousticness.mean()
+year_avg = df[['danceability','energy','liveness','acousticness', 'valence','year']].groupby('year').mean().sort_values(by='year').reset_index()
+​
+year_avg.head()
+plt.figure(figsize=(18,8))
+plt.title("Song Trends Over Time", fontsize=20)
+lines = ['danceability','energy','liveness','acousticness','valence']
+for line in lines:
+    ax = sns.lineplot(x='year', y=line, data=year_avg)
+plt.legend(lines)
+melted = year_avg.melt(id_vars='year')
+melted.head()
+plt.figure(figsize=(14,6))
+plt.title("Song Trends Over Time", fontsize=15)
+sns.lineplot(x='year', y='value', hue='variable', data=melted)
+
+
+Jupyter Notebook
+#Recommend Artist
+
+Code
+import pandas as pd
+import numpy as np 
+from dateutil.parser import parse
+data_w_genres = pd.read_csv(r'D:\dataset\spotify_data\data_w_genres.csv')
+data_w_genres.head()
+data_w_genres.describe()
+data_by_artist = pd.read_csv(r'D:\dataset\spotify_data\data_by_artist.csv')
+data_by_artist.head()
+data_by_artist.describe()
+song_df = pd.read_csv(r'D:\dataset\spotify_data\data_w_genres.csv',usecols=['artists','genres'])
+song_df.head()
+song_df.describe()
+rating_df = pd.read_csv(r'D:\dataset\spotify_data\data_by_artist.csv',usecols=['artists','count','popularity'])
+rating_df.head()
+rating_df.describe()
+df=pd.merge(song_df,rating_df,on='artists')
+df.head()
+df.describe()
+df.dropna()
+df.drop(['artists'],axis=1)
+df["average rating"] = df["popularity"] * df["count"]
+df.sort_values('average rating',ascending=False,inplace=True)
+df.head()
+df["artists"].head(20)
+# Recommend Artist
+​
+df["artists"].head(20)
+df["artists"].head()
+
+
+Jupyter Notebook
+#Predict Popularity rating
+
+Code
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+dataset=pd.read_csv(r'D:\dataset\spotify_data\data.csv')
+df=dataset
+print(df.head())
+df.head()
+df.describe()
+df.shape
+df.columns
+pd.isnull(df).sum()
+df.artists.nunique()
+df.artists.value_counts()[:10]
+grey
+a=pd.DataFrame({'song popularity':df['artists'].value_counts().head(10)})
+a.plot.bar(color='grey')
+plt.title('Top 10 Artists')
+plt.xlabel('Artists')
+plt.ylabel('Number of song')
+plt.show()
+artist_list = df.artists.value_counts().index[:10]
+df_artists = df[df.artists.isin(artist_list)][['artists','year','energy']].groupby(['artists','year']).count().reset_index()
+df_artists.rename(columns={'energy':'song_count'}, inplace=True)
+df_artists.head()
+print(df.keys())
+sns.distplot(df['popularity']).set_title('Popularity Distribution')
+sns.barplot(x = 'key', y = 'popularity', data = df)
+plt.title('Popularity Based on Key')
+sns.barplot(x = 'mode', y = 'popularity', data = df)
+plt.title('Popularity Based on Mode')
+sns.barplot(x = 'mode', y = 'popularity', hue = 'key', data = df)
+plt.title('Popularity Based on Mode and Key')
+sns.jointplot(x = 'acousticness', y = 'popularity', data = df)
+sns.jointplot(x = 'loudness', y = 'popularity', data = df)
+popular_above_50 = df[df.popularity > 50]
+sns.distplot(popular_above_50['acousticness'])
+plt.title('Acoustiness for Songs with More than 50 Popularity')
+popular_below_50 = df[df.popularity < 50]
+sns.distplot(popular_below_50['acousticness'])
+plt.title('Acoustiness for Songs with Less than 50 Popularity')
+sns.distplot(popular_above_50['loudness'])
+plt.title('Loudness for Songs with More than 50 Popularity')
+popular_below_50 = df[df.popularity < 50]
+sns.distplot(popular_below_50['loudness'])
+plt.title('Loudness for Songs with Less than 50 Popularity')
+df.loc[df["mode"] == 'Major', "mode"] = 1
+df.loc[df["mode"] == 'Minor', "mode"] = 0
+df.sample(5)
+df.loc[df['popularity'] < 57, 'popularity'] = 0 
+df.loc[df['popularity'] >= 57, 'popularity'] = 1
+df.loc[df['popularity'] == 1]
+
+
+Jupyter Notebook
+#Differentiate Genres
+
+Code
+import os
+import numpy as np
+import pandas as pd    
+import matplotlib.pyplot as plt
+%matplotlib inline
+import seaborn as sns
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.manifold import TSNE
+from sklearn.decomposition import PCA
+from sklearn.metrics import euclidean_distances
+from scipy.spatial.distance import cdist
+from dateutil.parser import parse 
+df = pd.read_csv(r'D:\dataset\spotify_data\data_w_genres.csv')
+df.head(10)
+df1=pd.read_csv(r'D:\dataset\spotify_data\data_by_genres.csv')
+df1.head(10)
+df2=pd.read_csv(r'D:\dataset\spotify_data\data_by_year.csv')
+df2.head(10)
+cluster_pipeline = Pipeline([('scaler', StandardScaler()), ('kmeans', KMeans(n_clusters=10, n_jobs=-1))])
+X = df1.select_dtypes(np.number)
+cluster_pipeline.fit(X)
+df1['cluster'] = cluster_pipeline.predict(X)
+tsne_pipeline = Pipeline([('scaler', StandardScaler()), ('tsne', TSNE(n_components=2, verbose=2))])
+genre_embedding = tsne_pipeline.fit_transform(X)
+projection = pd.DataFrame(columns=['x', 'y'], data=genre_embedding)
+projection['genres'] = df1['genres']
+projection['cluster'] = df1['cluster']
