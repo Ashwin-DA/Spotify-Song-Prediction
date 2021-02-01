@@ -1,22 +1,22 @@
 It is a task given by Technocolabs
 # Spotify-Song-Prediction
-CONTENTS
-Task :
-Perform time-series analysis :
-Recommend artists
-Predict Popularity rating
-Differentiate genres
+#CONTENTS
+#Task :
+#Perform time-series analysis :
+#Recommend artists
+#Predict Popularity rating
+#Differentiate genres
 
 
 
 
-Spotify Song Prediction
+Spotify Song Prediction:
 Audio features of 160k+ songs released in between 1921 and 2020
 Task :
 Perform time-series analysis :
 Analyze the trends of songs over the course of a century
 
-Task Details
+#Task Details
 The data.csv file is the least biased towards year of releases, because it is created using year queries, each with the same size of data. You can perform time-series analysis with minimal effort and minimal bias.
 
 Expected Submission
